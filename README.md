@@ -42,7 +42,12 @@ Access with web browser
   * user=root
   * password=test
 
-## 5. Delete all resources
+## 5. Scan code with [SonarQube](https://www.sonarsource.com/products/sonarqube/)
+```
+$docker compose up sonarscanner_php --abort-on-container-exit
+```
+
+## 6. Delete all resources
 ```
 $docker compose down
 $docker volume prune
