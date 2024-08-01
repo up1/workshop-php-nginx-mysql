@@ -47,7 +47,12 @@ Access with web browser
 $docker compose up sonarscanner_php --abort-on-container-exit
 ```
 
-## 6. Delete all resources
+## 6. Scan secret key with GitLeak
+```
+$docker compose up scan-gitleak --abort-on-container-exit
+```
+
+## 7. Delete all resources
 ```
 $docker compose down
 $docker volume prune

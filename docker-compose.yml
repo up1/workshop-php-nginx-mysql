@@ -65,3 +65,9 @@ services:
       - SONAR_PROJECT_NAME=php
     volumes:
       - ./php:/app
+
+  scan-gitleak:
+    image: zricethezav/gitleaks
+    volumes:
+      - ./:/code
+    command: ["detect", "--source", "/code", "-v"]
