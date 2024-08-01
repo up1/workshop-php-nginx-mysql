@@ -1,0 +1,56 @@
+services:
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "8000:80"
+    depends_on:
+      php:
+        condition: service_healthy
+  
+  php:
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    volumes:
+      - ./php:/var/www/html
+    healthcheck:
+      test: ["CMD", "php", "-f", "/var/www/html/index.php"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    depends_on:
+      db:
+        condition: service_healthy
+  
+  db:
+    image: mysql:9
+    environment:
+      MYSQL_DATABASE: demodb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: test
+      MYSQL_ROOT_PASSWORD: test
+    volumes:
+      - ./mysql:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+  
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8001:80"
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: test
+    depends_on:
+      db:
+        condition: service_healthy
+  
+  testing:
+    build:
+      context: ./testing
+      dockerfile: Dockerfile
