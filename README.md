@@ -2,6 +2,8 @@
 * PHP 8.3.9-fpm
 * NGINX
 * MySQL
+* PHPMyAdmin
+* Testing with [Cypress](https://www.cypress.io/)
 
 
 ## 1. Build 
@@ -24,7 +26,7 @@ php-nginx-php-1     php-nginx-php     "docker-php-entrypoi…"   php       About
 Access with web browser
 * http://localhost:8000
 
-## 3. UI Testing
+## 3. UI Testing with Cypress
 ```
 $docker compose up testing --abort-on-container-exit --build
 ```
