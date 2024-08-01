@@ -47,7 +47,7 @@ Access with web browser
 $docker compose up sonarscanner_php --abort-on-container-exit
 ```
 
-## 6. Scan secret key with GitLeak
+## 6. Scan secret key with [GitLeak](https://github.com/gitleaks/gitleaks)
 ```
 $docker compose up scan-gitleak --abort-on-container-exit
 ```
