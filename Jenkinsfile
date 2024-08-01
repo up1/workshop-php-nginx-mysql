@@ -3,7 +3,7 @@ pipeline {
         label 'docker01'
     }
     stages {
-        stage('Initialize') {
+        stage('Get code') {
             steps {
                 checkout scm
             }
@@ -22,6 +22,13 @@ pipeline {
             steps {
                 sh 'docker compose up testing --abort-on-container-exit --build'
             }
+        }
+    }
+
+    post {
+        always {
+            sh 'docker compose down'
+            sh 'docker volume prune -f'
         }
     }
 }
