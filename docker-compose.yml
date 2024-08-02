@@ -59,7 +59,7 @@ services:
     image: sonarsource/sonar-scanner-cli
     environment:
       - SONAR_HOST_URL=http://68.183.189.203:9000
-      - SONAR_TOKEN=sqa_e9b2588601b1b9dd857cdf2d356cc65b9306b0c1
+      - SONAR_TOKEN=xxx
       - SONAR_PROJECT_BASE_DIR=/app
       - SONAR_PROJECT_KEY=php
       - SONAR_PROJECT_NAME=php
