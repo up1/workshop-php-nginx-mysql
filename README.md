@@ -1,4 +1,4 @@
-# Workshop
+# Workshop 2024/09/09
 * PHP 8.3.9-fpm
 * NGINX
 * MySQL
