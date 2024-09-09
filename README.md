@@ -14,6 +14,7 @@ $docker compose build nginx
 
 ## 2. Run NGINX + PHP (fpm) + MySQL
 ```
+$export WEB_PORT=your-port
 $docker compose up -d nginx
 
 $docker compose ps
@@ -44,6 +45,8 @@ Access with web browser
 
 ## 5. Scan code with [SonarQube](https://www.sonarsource.com/products/sonarqube/)
 ```
+$export SONAR_PROJECT_KEY=php
+$export SONAR_TOKEN=your-token
 $docker compose up sonarscanner_php --abort-on-container-exit
 ```
 

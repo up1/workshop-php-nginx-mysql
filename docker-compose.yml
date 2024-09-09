@@ -4,7 +4,7 @@ services:
       context: ./nginx
       dockerfile: Dockerfile
     ports:
-      - "8000:80"
+      - "${WEB_PORT:-8000}:80"
     depends_on:
       php:
         condition: service_healthy
@@ -58,11 +58,11 @@ services:
   sonarscanner_php:
     image: sonarsource/sonar-scanner-cli
     environment:
-      - SONAR_HOST_URL=http://68.183.189.203:9000
-      - SONAR_TOKEN=xxx
+      - SONAR_HOST_URL=http://128.199.137.221:9000
+      - SONAR_TOKEN=${SONAR_TOKEN:-token}
       - SONAR_PROJECT_BASE_DIR=/app
-      - SONAR_PROJECT_KEY=php
-      - SONAR_PROJECT_NAME=php
+      - SONAR_PROJECT_KEY=${SONAR_PROJECT_KEY:-php}
+      - SONAR_PROJECT_NAME=${SONAR_PROJECT_KEY:-php}
     volumes:
       - ./php:/app
 
