@@ -1,5 +1,6 @@
 services:
   nginx:
+    image: somkiat/nginx:1.0
     build:
       context: ./nginx
       dockerfile: Dockerfile
@@ -10,6 +11,7 @@ services:
         condition: service_healthy
   
   php:
+    image: somkiat/php:1.0
     build:
       context: ./php
       dockerfile: Dockerfile
@@ -26,6 +28,7 @@ services:
   
   db:
     image: mysql:9
+    mem_limit: 1g
     environment:
       MYSQL_DATABASE: demodb
       MYSQL_USER: user
@@ -33,6 +36,7 @@ services:
       MYSQL_ROOT_PASSWORD: test
     volumes:
       - ./mysql:/docker-entrypoint-initdb.d
+      - ./mysql/data:/var/lib/mysql
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 5s
