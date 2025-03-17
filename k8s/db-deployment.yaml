@@ -27,9 +27,15 @@ spec:
             - name: MYSQL_DATABASE
               value: demodb
             - name: MYSQL_PASSWORD
-              value: test
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: mysql-password
             - name: MYSQL_ROOT_PASSWORD
-              value: test
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: mysql-root-password
             - name: MYSQL_USER
               value: user
           image: mysql:9

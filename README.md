@@ -104,6 +104,9 @@ $kubectl get pvc
 $kubectl apply -f db-cm0-configmap.yaml
 $kubectl get configmap
 
+$kubectl apply -f mysql-secret.yaml
+$kubectl get secret
+
 $kubectl apply -f db-deployment.yaml
 $kubectl get deployment
 $kubectl get rs
