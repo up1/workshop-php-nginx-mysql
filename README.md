@@ -141,3 +141,8 @@ $kubectl port-forward service/nginx 8000:8000
 ```
 Access to app in web browser
 * http://localhost:8000/
+
+## 10. Delete all resources
+```
+$kubectl delete -f .
+```
