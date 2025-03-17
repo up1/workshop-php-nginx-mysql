@@ -60,3 +60,84 @@ $docker compose up scan-gitleak --abort-on-container-exit
 $docker compose down
 $docker volume prune
 ```
+
+## 8. Convert from docker compose to Kubernetes
+* [Kompose](https://kompose.io/)
+
+```
+$kompose convert
+```
+
+## 9. Deploy on Kubernetes
+* [minikube]https://minikube.sigs.k8s.io/docs/start/
+* [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
+
+**Start Kubernetes**
+```
+$minikube start --driver=docker --alsologtostderr
+$minikube status
+
+$minikube dashboard
+```
+
+**Check cluster**
+```
+$kubectl version --client
+$kubectl cluster-info
+$kubectl config view
+$kubectl get nodes
+$kubectl get pods --all-namespaces
+```
+
+**Install app to cluster**
+* DB
+* PHP
+* NGINX
+
+MySQL Database
+```
+$cd k8s
+$kubectl apply -f db-claim1-persistentvolumeclaim.yaml
+$kubectl get pv
+$kubectl get pvc
+
+$kubectl apply -f db-cm0-configmap.yaml
+$kubectl get configmap
+
+$kubectl apply -f db-deployment.yaml
+$kubectl get deployment
+$kubectl get rs
+$kubectl get pod
+
+$kubectl apply -f db-service.yaml
+$kubectl get service
+```
+
+PHP
+```
+$kubectl apply -f php-deployment.yaml
+$kubectl get deployment
+$kubectl get rs
+$kubectl get pod
+
+$kubectl apply -f php-service.yaml
+$kubectl get service
+```
+
+NGINX
+```
+$kubectl apply -f nginx-deployment.yaml
+$kubectl get deployment
+$kubectl get rs
+$kubectl get pod
+
+$kubectl apply -f nginx-service.yaml
+$kubectl get service
+```
+
+Expose nginx service
+```
+$kubectl port-forward service/nginx 8000:8000
+```
+Access to app in web browser
+* http://localhost:8000/
