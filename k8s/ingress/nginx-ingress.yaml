@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: demo-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"  # Force HTTPS
+    nginx.ingress.kubernetes.io/proxy-set-headers: "ingress-headers"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/affinity: cookie
+    nginx.ingress.kubernetes.io/session-cookie-name: demo_session
+    nginx.ingress.kubernetes.io/session-cookie-hash: sha1
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: "demo.app.com"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nginxv2
+            port:
+              number: 8000
